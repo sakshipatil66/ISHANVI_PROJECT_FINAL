@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --color-cream-50: #FDFBF7;
+  --color-cream-100: #FAF8F2;
+  --color-cream-200: #F3EFE6;
+  --color-cream-300: #EAE3D2;
+  --color-forest-900: #0E2016;
+  --color-forest-800: #142E20;
+  --color-forest-700: #1B3B2B;
+  --color-forest-600: #26523D;
+  --color-gold-400: #DFB76C;
+  --color-gold-500: #C5A059;
+  --color-gold-600: #A8833E;
+}
+
+:root {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+
+.font-serif {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.font-sans {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+}
+
+/* ========================================================
+   UNIFIED ISHANVI TYPOGRAPHY DESIGN SYSTEM
+   ======================================================== */
+
+/* H1: Main Page & Hero Display Title (Unified Across Site) */
+.title-page {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.25rem, 4.2vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* H2: Section Headings (Uniform across every section) */
+.heading-section {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+/* Overline / Kicker with Gold Accent */
+.kicker-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.75rem; /* 12px */
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C5A059;
+}
+
+/* Section Subtitle / Lead Paragraph */
+.text-lead {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: clamp(0.875rem, 1.1vw, 1.0625rem);
+  line-height: 1.65;
+  color: #5A655F;
+}
+
+/* H3: Card & Subsection Headings (Uniform across all cards) */
+.heading-card {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.125rem, 1.35vw, 1.375rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+/* Standard Body Paragraph */
+.text-body {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.6;
+  color: #5A655F;
+}
+
+/* Compact Body Text */
+.text-body-sm {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.55;
+  color: #5A655F;
+}
+
+/* Micro Caption / Label / Status */
+.text-caption {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.5;
+  color: #718096;
+}
+
+/* Unified Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.625rem;
+  border-radius: 9999px;
+  background-color: #102A1C;
+  color: #FFFFFF;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(16, 42, 28, 0.18);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background-color: #1B3B2B;
+  box-shadow: 0 6px 20px rgba(16, 42, 28, 0.24);
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  background-color: #FFFFFF;
+  border: 1px solid #EFEAE1;
+  color: #102A1C;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  border-color: #102A1C;
+  background-color: #FAF8F5;
+}
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+/* Standardized Section Vertical Spacing */
+.section-space {
+  padding-top: clamp(4rem, 6vw, 6.25rem);
+  padding-bottom: clamp(4rem, 6vw, 6.25rem);
+}
+
+/* Subtle Golden Divider Accent */
+.gold-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.35), transparent);
+}
+
+/* Accessibility: Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8D2C2;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1B3B2B;
+}
