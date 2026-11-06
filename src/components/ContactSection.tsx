@@ -150,19 +150,41 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     <CheckCircle2 className="w-8 h-8 text-[#102A1C]" />
                   </div>
                   <h3 className="font-serif text-2xl font-bold text-[#102A1C]">
-                    Enquiry Submitted Successfully!
+                    Enquiry Details Ready
                   </h3>
                   <p className="text-xs sm:text-sm text-[#718096] max-w-sm mx-auto">
-                    Thank you <strong>{formData.name}</strong>. Our team will contact you at{' '}
-                    <strong>{formData.phone}</strong> regarding <strong>{formData.preferredRoom}</strong>.
+                    Thank you <strong>{formData.name}</strong>. Reference ID: <span className="font-mono font-bold text-[#102A1C]">{token}</span> for <strong>{formData.preferredRoom}</strong>.
                   </p>
-                  <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#EFEAE1] max-w-xs mx-auto text-xs">
-                    Reference ID: <span className="font-mono font-bold text-[#102A1C]">{token}</span>
+                  
+                  {/* Real WhatsApp Fallback & Direct Connect */}
+                  <div className="p-4 bg-[#FAF8F5] rounded-2xl border border-[#EFEAE1] max-w-md mx-auto space-y-3 text-left">
+                    <p className="text-xs font-semibold text-[#102A1C] text-center">
+                      Connect directly with ISHANVI Admissions on WhatsApp:
+                    </p>
+                    <a
+                      href={`https://wa.me/917767058988?text=${encodeURIComponent(
+                        `Hello ISHANVI Hostel Admissions,\n\nI am enquiring about accommodation:\n- Name: ${formData.name}\n- Phone: ${formData.phone}\n- Email: ${formData.email}\n- Category: ${formData.residentType}\n- Preferred Room: ${formData.preferredRoom}\n- Reference ID: ${token}\n- Note: ${formData.message || 'Please share tariff & availability'}`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold transition-all shadow-md"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      <span>Send Enquiry via WhatsApp (+91 77670 58988)</span>
+                    </a>
+                    <a
+                      href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
+                      className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-white border border-[#EFEAE1] hover:border-[#102A1C] text-[#102A1C] text-xs font-semibold transition-all"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
+                      <span>Or Call Admissions Directly ({HOSTEL_INFO.phonePrimary})</span>
+                    </a>
                   </div>
+
                   <div className="pt-2">
                     <button
                       onClick={resetForm}
-                      className="px-5 py-2.5 text-xs font-semibold text-[#102A1C] bg-[#F4EFE6] rounded-full hover:bg-[#EAE3D2] transition-colors"
+                      className="px-5 py-2 text-xs font-semibold text-[#102A1C] bg-[#F4EFE6] rounded-full hover:bg-[#EAE3D2] transition-colors"
                     >
                       Submit Another Enquiry
                     </button>

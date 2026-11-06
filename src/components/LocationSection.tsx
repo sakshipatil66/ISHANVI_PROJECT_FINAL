@@ -121,6 +121,20 @@ export const LocationSection: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Interactive Google Map Embed */}
+                <div className="relative rounded-2xl overflow-hidden aspect-[16/9] border border-[#EFEAE1] mb-5 shadow-inner">
+                  <iframe
+                    title="ISHANVI Hostel Location near ISMS Sankalp Ambegaon Pune"
+                    src="https://maps.google.com/maps?q=ISMS+Sankalp+Business+School+Ambegaon+Bk+Pune+411066&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
+                  />
+                </div>
+
                 <div className="space-y-2 text-xs text-[#5A655F]">
                   <div className="flex justify-between py-1.5 border-b border-[#EFEAE1]">
                     <span className="text-[#718096]">Standard Gate Hours:</span>
@@ -141,7 +155,7 @@ export const LocationSection: React.FC = () => {
                   className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-[#102A1C] hover:bg-[#1B3B2B] text-white text-xs font-semibold shadow-sm transition-all"
                 >
                   <Navigation className="w-4 h-4 text-[#DFB76C]" />
-                  <span>Get Driving & Walking Directions on Google Maps</span>
+                  <span>Open Direct Directions in Google Maps</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>

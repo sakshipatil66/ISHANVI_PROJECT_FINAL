@@ -53,36 +53,48 @@ export const TestimonialsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* 3 Review Cards matching reference */}
+        {/* 3 Review Cards exactly matching Screenshot 074059 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {visibleReviews.map((t) => (
-            <div
-              key={t.id}
-              className="bg-white rounded-2xl p-6 sm:p-7 border border-[#EFEAE1] shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-5"
-            >
-              <p className="text-sm text-[#4A5568] leading-relaxed italic">
-                "{t.quote}"
-              </p>
+          {visibleReviews.map((t) => {
+            const avatarUrl =
+              t.author === 'Riya S.'
+                ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+                : t.author === 'Aakiv K.'
+                ? 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
+                : 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80';
 
-              <div className="pt-3 border-t border-[#EFEAE1]/60 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center text-[#102A1C] shrink-0 font-bold text-xs">
-                    {t.author.charAt(0)}
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-[#102A1C]">{t.author}</h4>
-                    <p className="text-xs text-[#718096]">{t.role} · {t.roomType}</p>
-                  </div>
-                </div>
+            return (
+              <div
+                key={t.id}
+                className="bg-white rounded-2xl p-6 sm:p-7 border border-[#EFEAE1] shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-5"
+              >
+                <p className="text-sm text-[#4A5568] leading-relaxed italic">
+                  "{t.quote}"
+                </p>
 
-                <div className="flex items-center gap-0.5">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-[#DFB76C] text-[#DFB76C]" />
-                  ))}
+                <div className="pt-4 border-t border-[#EFEAE1]/60 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={avatarUrl}
+                      alt={t.author}
+                      className="w-10 h-10 rounded-full object-cover border border-[#EFEAE1] shrink-0"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div>
+                      <h4 className="text-sm font-bold text-[#102A1C]">{t.author}</h4>
+                      <p className="text-xs text-[#718096]">{t.role}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-[#DFB76C] text-[#DFB76C]" />
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

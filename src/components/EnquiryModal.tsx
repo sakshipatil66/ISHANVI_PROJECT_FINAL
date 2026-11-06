@@ -107,22 +107,47 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
         {/* Content */}
         <div className="p-6">
           {submitted ? (
-            <div className="text-center py-6 space-y-4">
+            <div className="text-center py-4 space-y-4">
               <div className="w-14 h-14 rounded-full bg-[#102A1C]/10 text-[#102A1C] flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8 text-[#102A1C]" />
               </div>
               <h4 className="font-serif text-xl font-bold text-[#102A1C]">
-                Enquiry Registered!
+                Enquiry Details Ready
               </h4>
               <p className="text-xs text-[#718096] max-w-xs mx-auto">
-                Thank you! We've received your inquiry for <strong>{formData.room}</strong>. Reference: <span className="font-mono font-bold text-[#102A1C]">{token}</span>.
+                Thank you <strong>{formData.name}</strong>. Reference: <span className="font-mono font-bold text-[#102A1C]">{token}</span> for <strong>{formData.room}</strong>.
               </p>
+              
+              <div className="p-4 bg-[#FAF8F5] rounded-2xl border border-[#EFEAE1] space-y-2.5 text-left">
+                <p className="text-xs font-semibold text-[#102A1C] text-center">
+                  Direct WhatsApp Connect:
+                </p>
+                <a
+                  href={`https://wa.me/917767058988?text=${encodeURIComponent(
+                    `Hello ISHANVI Hostel Admissions,\n\nI am enquiring about room booking:\n- Name: ${formData.name}\n- Phone: ${formData.phone}\n- Email: ${formData.email}\n- Room Preference: ${formData.room}\n- Move-In Date: ${formData.moveInDate}\n- Reference ID: ${token}`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold transition-all shadow-md"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Send Enquiry via WhatsApp</span>
+                </a>
+                <a
+                  href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-white border border-[#EFEAE1] hover:border-[#102A1C] text-[#102A1C] text-xs font-semibold transition-all"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
+                  <span>Call Reception ({HOSTEL_INFO.phonePrimary})</span>
+                </a>
+              </div>
+
               <div className="pt-2">
                 <button
                   onClick={handleClose}
-                  className="px-6 py-2.5 text-xs font-semibold text-white bg-[#102A1C] hover:bg-[#1B3B2B] rounded-full transition-colors cursor-pointer"
+                  className="px-6 py-2 text-xs font-semibold text-[#102A1C] bg-[#F4EFE6] hover:bg-[#EAE3D2] rounded-full transition-colors cursor-pointer"
                 >
-                  Done
+                  Close
                 </button>
               </div>
             </div>

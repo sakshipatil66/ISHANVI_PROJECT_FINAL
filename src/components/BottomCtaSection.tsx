@@ -8,13 +8,13 @@ interface BottomCtaSectionProps {
 
 export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquiry }) => {
   return (
-    <section className="py-16 lg:py-20 bg-[#FDFBF7]">
+    <section className="py-6 sm:py-10 bg-[#FDFBF7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Exact Bottom Card from Reference Screenshot */}
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FAF6ED] via-[#F4EFE6] to-[#EAE3D2] border border-[#EFEAE1] shadow-xl p-8 sm:p-12 lg:p-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FAF6ED] via-[#F4EFE6] to-[#EAE3D2] border border-[#EFEAE1] shadow-xl p-6 sm:p-8 lg:p-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Left Column: Heading, Subtitle, Enquire Button */}
-            <div className="lg:col-span-7 space-y-5">
+            <div className="lg:col-span-7 space-y-4">
               <h2 className="heading-section text-[#102A1C]">
                 Start Your Better <br />
                 Tomorrow With Ishanvi

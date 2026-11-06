@@ -44,41 +44,43 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
   return (
     <section id="amenities" className="section-space bg-[#FDFBF7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header matching Screenshot 074113 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-14"
+          className="text-center max-w-2xl mx-auto mb-12"
         >
           <div className="kicker-label justify-center mb-2">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
-            <span>AMENITIES & FACILITIES</span>
+            <span>AMENITIES</span>
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
           </div>
           <h2 className="heading-section text-[#102A1C]">
             Everything You Need <br className="hidden sm:block" />
             For A Hassle-Free Stay
           </h2>
-          <p className="mt-3 text-lead max-w-xl mx-auto">
-            Every utility has been curated so you never have to worry about erratic Wi-Fi, food hygiene, or safety.
-          </p>
+          {isStandalonePage && (
+            <p className="mt-3 text-lead max-w-xl mx-auto">
+              Every utility has been curated so you never have to worry about erratic Wi-Fi, food hygiene, or safety.
+            </p>
+          )}
         </motion.div>
 
-        {/* 8 Amenities Grid matching reference */}
+        {/* 8 Amenities in an elegant row matching Screenshot 074113 */}
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 sm:gap-6">
           {AMENITIES_LIST.map((item, idx) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.05 }}
-              whileHover={{ y: -5 }}
-              className="bg-white rounded-2xl p-5 border border-[#EFEAE1] shadow-xs hover:shadow-lg hover:border-[#C5A059] transition-all flex flex-col items-center text-center justify-center space-y-3 group cursor-default"
+              transition={{ duration: 0.5, delay: idx * 0.04 }}
+              whileHover={{ y: -4 }}
+              className="flex flex-col items-center text-center justify-center space-y-3 group cursor-default p-2"
             >
-              <div className="w-12 h-12 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center group-hover:scale-110 group-hover:bg-[#102A1C] transition-all">
+              <div className="w-14 h-14 rounded-full bg-white border border-[#EFEAE1] shadow-2xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#102A1C] group-hover:border-[#102A1C] transition-all">
                 {getAmenityIcon(item.iconName)}
               </div>
               <h3 className="font-serif text-xs sm:text-sm font-bold text-[#102A1C] leading-snug">

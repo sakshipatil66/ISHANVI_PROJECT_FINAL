@@ -10,6 +10,7 @@ export interface RoomItem {
   tagline: string;
   priceNote: string;
   image: string;
+  authenticImage?: string;
   iconType: 'bed' | 'users' | 'crown';
   description: string;
   highlights: string[];
@@ -70,6 +71,7 @@ export const ROOMS_DATA: RoomItem[] = [
     tagline: 'Privacy & Peace',
     priceNote: 'Enquire for pricing · Contact us for availability',
     image: '/assets/rooms/single_room_large.jpg',
+    authenticImage: '/assets/rooms/single_room_large.jpg',
     iconType: 'bed',
     description: 'A private room for focused study or work, with a desk, storage and a cosy bed.',
     dimensions: '160 sq. ft.',
@@ -98,6 +100,7 @@ export const ROOMS_DATA: RoomItem[] = [
     tagline: 'Comfort with Companionship',
     priceNote: 'Enquire for pricing · Contact us for availability',
     image: '/assets/rooms/double_room_large.jpg',
+    authenticImage: '/assets/rooms/double_room_large.jpg',
     iconType: 'users',
     description: 'A friendly shared room with individual beds and space for everyone.',
     dimensions: '240 sq. ft.',
@@ -126,6 +129,7 @@ export const ROOMS_DATA: RoomItem[] = [
     tagline: 'Extra Comfort & Space',
     priceNote: 'Enquire for pricing · Contact us for availability',
     image: '/assets/rooms/premium_room_large.jpg',
+    authenticImage: '/assets/rooms/premium_room_large.jpg',
     iconType: 'crown',
     description: 'Our most spacious option with upgraded furnishings and extra comfort.',
     dimensions: '300 sq. ft.',
@@ -314,84 +318,126 @@ export const WHY_CHOOSE_ISHANVI = [
 ];
 
 export const GALLERY_PHOTOS = [
-  { id: '1', title: 'Reception & Entrance Lobby', category: 'campus', image: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_11.09.47_AM_48669e14.jpeg', caption: 'Welcoming entrance lobby at Ambegaon Bk' },
-  { id: '2', title: 'Single Room Interior', category: 'rooms', image: '/assets/rooms/single_room_large.jpg', caption: 'Clean, private room with study workstation and wardrobe' },
-  { id: '3', title: 'Sharing Room Setup', category: 'rooms', image: '/assets/rooms/double_room_large.jpg', caption: 'Organized twin sharing accommodation with dual desks' },
-  { id: '4', title: 'Study & Living Space', category: 'study', image: '/assets/ref/about_room.jpg', caption: 'Ergonomic study setup and comfortable living quarters' },
-  { id: '5', title: 'Resident Bedroom', category: 'rooms', image: '/assets/rooms/premium_room_large.jpg', caption: 'Premium furnishings, extra storage, and cozy beds' },
-  { id: '6', title: 'Silent Study Library', category: 'study', image: '/assets/images/amenity_study_lounge_1793879542441.jpg', caption: 'Dedicated silent study desks with individual lamps' },
-  { id: '7', title: 'Hygienic Dining Hall', category: 'amenities', image: '/assets/images/amenity_dining_hall_1793879543322.jpg', caption: 'Homestyle meal area serving 4 daily fresh meals' },
-  { id: '8', title: 'Recreation & TT Lounge', category: 'amenities', image: '/assets/images/amenity_recreation_hub_1793879542921.jpg', caption: 'Table tennis and community social relaxation space' },
+  { id: '1', title: 'Reception & Entrance Lobby', category: 'campus', image: '/assets/images/amenity_security_lobby_1793879543609.jpg', caption: 'Front reception desk with guest assistance and 24/7 security log register' },
+  { id: '2', title: 'Community Living Lounge', category: 'amenities', image: '/assets/images/amenity_recreation_hub_1793879542921.jpg', caption: 'Table tennis, indoor games, and comfortable community social lounge area' },
+  { id: '3', title: 'Hygienic Dining Hall', category: 'amenities', image: '/assets/images/amenity_dining_hall_1793879543322.jpg', caption: 'Clean homestyle dining hall serving 4 fresh vegetarian chef-prepared meals daily' },
+  { id: '4', title: 'Premium Suite Bedroom', category: 'rooms', image: '/assets/images/room_premium_suite_1793879541092.jpg', caption: 'Spacious premium room with upgraded wood finishes and expansive window daylight' },
+  { id: '5', title: 'Rooftop Community Terrace', category: 'campus', image: '/assets/images/community_terrace_hd_1793946912508.jpg', caption: 'Breezy open terrace garden overlooking Pune hills for evening chai, relaxation, and conversation' },
+  { id: '6', title: 'Single Room (Authentic Property)', category: 'rooms', image: '/assets/rooms/single_room_large.jpg', caption: 'Actual single room at ISHANVI with wooden wardrobe, ergonomic study desk, and natural ventilation' },
+  { id: '7', title: 'Double / Sharing Room (Authentic Property)', category: 'rooms', image: '/assets/rooms/double_room_large.jpg', caption: 'Actual twin sharing room layout with individual beds, separate wardrobes, and study space' },
+  { id: '8', title: 'Premium Room (Authentic Property)', category: 'rooms', image: '/assets/rooms/premium_room_large.jpg', caption: 'Actual premium room layout at ISHANVI hostel' },
+  { id: '9', title: 'Silent Study Library', category: 'study', image: '/assets/images/amenity_study_lounge_1793879542441.jpg', caption: 'Dedicated quiet study lounge with high-speed Wi-Fi, individual charging points, and desk lamps' },
+  { id: '10', title: 'Fitness & Wellness Facility', category: 'amenities', image: '/assets/images/amenity_fitness_hd_1793946898388.jpg', caption: 'Dedicated fitness and workout area with treadmills, free weights, and stretching mats' },
+  { id: '11', title: 'Study Workstation Suite', category: 'study', image: '/assets/ref/about_room.jpg', caption: 'Comfortable study suite with integrated bookshelf, ergonomic seating, and deep focus ambiance' },
+  { id: '12', title: 'Official Facility Information & Flyer', category: 'campus', image: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_11.09.47_AM_48669e14.jpeg', caption: 'Official ISHANVI banner detailing room highlights, security, and admissions desk helpline' },
 ];
 
 export const TESTIMONIALS_LIST: TestimonialItem[] = [
   {
     id: 't-1',
-    author: 'Priya S.',
+    author: 'Riya S.',
     role: 'Student',
     institution: 'ISMS Sankalp Business School',
-    quote: 'A very safe and comfortable place with great facilities. Feels like home! The food is hygienic and the college is just 2 minutes away.',
+    quote: 'A very safe and comfortable place with great facilities. Feels like home!',
     rating: 5,
-    roomType: 'Single Room',
+    roomType: 'Student',
   },
   {
     id: 't-2',
-    author: 'Aarav K.',
+    author: 'Aakiv K.',
     role: 'Working Professional',
-    institution: 'Software Analyst',
-    quote: 'Clean rooms, good food and a friendly environment. Highly recommended! Reliable Wi-Fi made my work transitions completely seamless.',
+    institution: 'Working Professional, Pune',
+    quote: 'Clean rooms, good food and a friendly environment. Highly recommended!',
     rating: 5,
-    roomType: 'Premium Room',
+    roomType: 'Working Professional',
   },
   {
     id: 't-3',
-    author: 'Neha R.',
+    author: 'Neha P.',
     role: 'Student',
-    institution: 'Undergraduate Commerce',
-    quote: "The best hostel experience I've had so far. Great community, caring wardens, and zero distractions during exam times.",
+    institution: 'Undergraduate Scholar',
+    quote: "The best hostel experience I've had so far. Great community!",
     rating: 5,
-    roomType: 'Double / Sharing Room',
+    roomType: 'Student',
   },
   {
     id: 't-4',
     author: 'Suresh Patil',
     role: 'Parent',
-    institution: 'Parent of Resident',
-    quote: 'As parents living outside Pune, ISHANVI gave us 100% peace of mind. The warden is always reachable and security is top-notch.',
+    institution: 'Parent of MBA Scholar',
+    quote: 'As parents living outside Pune, ISHANVI gave us 100% peace of mind. The warden is always reachable, CCTV surveillance is strictly monitored, and security is truly top-notch.',
     rating: 5,
     roomType: 'Single Room',
+  },
+  {
+    id: 't-5',
+    author: 'Rohan Deshmukh',
+    role: 'Student',
+    institution: 'Engineering Aspirant',
+    quote: 'The silent study lounge is a game-changer. Late-night study sessions without disturbance helped me focus on my gate exam preparations. Daily housekeeping keeps everything spotless.',
+    rating: 5,
+    roomType: 'Double / Sharing Room',
+  },
+  {
+    id: 't-6',
+    author: 'Sunita Kulkarni',
+    role: 'Parent',
+    institution: 'Parent of Resident',
+    quote: 'We visited 5 different hostels in Ambegaon Bk before choosing ISHANVI. The hygiene of the kitchen and the polite behavior of the staff made our choice completely clear.',
+    rating: 5,
+    roomType: 'Premium Room',
   },
 ];
 
 export const FAQS_DATA: FaqItem[] = [
   {
     question: 'Where is ISHANVI Hostel located in Pune?',
-    answer: 'We are situated Near ISMS Sankalp Business School, Ambegaon Bk, Pune - 411066. It is a peaceful, student-friendly institutional neighborhood with immediate access to bus stops, convenience stores, and Katraj Chowk.',
+    answer: 'We are situated Near ISMS Sankalp Business School, Ambegaon Bk, Pune - 411066. It is a peaceful, student-friendly institutional neighborhood with immediate access to bus stops, supermarkets, Katraj Chowk, and colleges.',
     category: 'location',
   },
   {
     question: 'What room types are available for booking?',
-    answer: 'We offer three carefully planned categories: Single Rooms (Privacy & Peace), Double / Sharing Rooms (Comfort with Companionship), and Premium Rooms (Extra Comfort & Space). All options come fully furnished.',
+    answer: 'We offer three carefully planned categories: Single Rooms (Privacy & Peace), Double / Sharing Rooms (Comfort with Companionship), and Premium Rooms (Extra Comfort & Space). All options are fully furnished with orthopaedic beds, study tables, chairs, and dedicated wooden wardrobes with locks.',
     category: 'rooms',
   },
   {
     question: 'Are meals included in the accommodation fee?',
-    answer: 'Yes! We provide 4 freshly prepared, hygienic homestyle meals every day: Breakfast with tea, wholesome lunch, evening high-tea with snacks, and balanced dinner. Pure vegetarian and nutritious.',
+    answer: 'Yes! We provide 4 freshly prepared, hygienic homestyle meals every day: Breakfast with hot chai (7:30 AM – 9:30 AM), wholesome lunch (12:30 PM – 2:30 PM), evening high-tea with snacks (5:00 PM – 6:30 PM), and balanced dinner (8:00 PM – 10:00 PM). Pure vegetarian and cooked with utmost cleanliness.',
     category: 'food',
   },
   {
-    question: 'What security measures are in place?',
-    answer: 'Safety is our highest priority. The property has 24/7 security guards at the main entrance, full CCTV coverage across all common corridors and gates, digital entry logs, and on-duty resident wardens.',
+    question: 'What security measures are in place for resident safety?',
+    answer: 'Safety is our highest priority. The property features 24/7 guarded main gates, comprehensive CCTV surveillance coverage across all common corridors and entrances, biometric/visitor register logging, and caring on-duty resident wardens.',
     category: 'security',
   },
   {
     question: 'What are the gate timings and curfew policy?',
-    answer: 'Standard gate closing time is 10:00 PM for resident safety. Students attending late college classes, lab work, or library study can receive extended permissions with prior warden intimation.',
+    answer: 'Standard gate closing time is 10:00 PM for resident safety and disciplined study environment. Students attending late college classes, lab work, or library study can receive extended permissions with prior intimation to the hostel warden.',
     category: 'security',
   },
   {
+    question: 'What documents are required for admission?',
+    answer: 'For smooth admission, please bring: 1. Government Photo ID (Aadhaar Card / Passport), 2. College ID Card or Company Offer Letter / Work ID, 3. Two passport-size photographs, and 4. Emergency contact details of parents/guardians.',
+    category: 'admission',
+  },
+  {
+    question: 'Is there power backup and high-speed internet for studies?',
+    answer: 'Yes. We provide high-speed optical fiber Wi-Fi throughout all rooms and study corners, along with 100% generator/inverter power backup to ensure lights, study fans, and internet remain active during any grid outages.',
+    category: 'amenities',
+  },
+  {
+    question: 'How is laundry and room housekeeping managed?',
+    answer: 'Common areas, corridors, and room floors are swept and sanitized daily by professional housekeeping staff. Washrooms are deep-cleaned regularly. Dedicated laundry facilities and washing machine access are provided on-site.',
+    category: 'amenities',
+  },
+  {
     question: 'How do I enquire about pricing and reserve a room?',
-    answer: 'You can submit an online enquiry via the "Enquire Now" button on any room card, message us on WhatsApp, or call our admissions helpline directly at +91 77670 58988 to schedule a free campus visit.',
+    answer: 'You can submit an online enquiry via the "Enquire Now" button on any room card, message our admissions desk directly on WhatsApp at +91 77670 58988, or call us to schedule a free property tour.',
+    category: 'admission',
+  },
+  {
+    question: 'Can parents visit residents at the hostel?',
+    answer: 'Yes! Parents and authorized guardians are always welcome. We have a dedicated visitor receiving lounge open from 9:00 AM to 8:00 PM every day.',
     category: 'admission',
   },
 ];

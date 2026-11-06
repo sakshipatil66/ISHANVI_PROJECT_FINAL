@@ -41,13 +41,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
               Navigation
             </h4>
             <ul className="space-y-2 text-xs text-[#CBD5E0]">
-              {['Home', 'About', 'Rooms', 'Amenities', 'Gallery', 'Contact'].map((item) => (
-                <li key={item}>
+              {[
+                { id: 'home', label: 'Home' },
+                { id: 'about', label: 'About' },
+                { id: 'rooms', label: 'Rooms' },
+                { id: 'amenities', label: 'Amenities' },
+                { id: 'gallery', label: 'Gallery' },
+                { id: 'contact', label: 'Contact' },
+              ].map((link) => (
+                <li key={link.id}>
                   <button
-                    onClick={() => onNavClick(item.toLowerCase())}
-                    className="hover:text-[#DFB76C] transition-colors cursor-pointer"
+                    onClick={() => onNavClick(link.id)}
+                    className="hover:text-[#DFB76C] transition-colors cursor-pointer text-left"
                   >
-                    {item}
+                    {link.label}
                   </button>
                 </li>
               ))}

@@ -32,6 +32,20 @@ export default function App() {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState<boolean>(false);
   const [selectedRoomForEnquiry, setSelectedRoomForEnquiry] = useState<string | undefined>(undefined);
 
+  React.useEffect(() => {
+    const titles: Record<string, string> = {
+      home: 'ISHANVI | Luxury Hostel & Accommodation near ISMS Sankalp Ambegaon Pune',
+      about: 'About Us | ISHANVI Hostel & Accommodation Ambegaon Bk Pune',
+      rooms: 'Rooms & Pricing Enquiry | Single & Sharing Rooms | ISHANVI Hostel Pune',
+      amenities: 'Hostel Amenities & Facilities | Wi-Fi, Food, Gym | ISHANVI Pune',
+      gallery: 'Photo Gallery | Verified Property & Rooms | ISHANVI Hostel Pune',
+      contact: 'Contact & Admissions Desk | ISHANVI Hostel Ambegaon Bk Pune',
+    };
+    if (titles[activePage]) {
+      document.title = titles[activePage];
+    }
+  }, [activePage]);
+
   const handleOpenEnquiry = (roomName?: string) => {
     setSelectedRoomForEnquiry(roomName);
     setIsEnquiryModalOpen(true);
@@ -49,7 +63,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FDFBF7] text-[#222B25] font-sans selection:bg-[#102A1C] selection:text-[#DFB76C] overflow-x-hidden">
-      {/* River Smile Inspired Hairline Scroll Progress Bar */}
+      {/* Hairline Scroll Progress Bar */}
       <ScrollProgress />
 
       {/* Top Navigation Bar with Official ISHANVI Logo */}
@@ -60,73 +74,66 @@ export default function App() {
       />
 
       <main className="flex-1">
-        {/* HOMEPAGE: Connected Storytelling Journey */}
+        {/* HOMEPAGE: Connected Storytelling with Premium 2-Slide Hero Carousel */}
         {activePage === 'home' && (
           <>
-            {/* 1. Cinematic Hero with 3 Trust Badges & 6-Feature Floating Strip */}
+            {/* HERO SECTION: Dual-Slide Carousel with Both Uploaded Images */}
             <HeroSection
               onOpenEnquiry={handleOpenEnquiry}
               onExploreRooms={() => handlePageChange('rooms')}
             />
 
-            {/* 2. Welcome to ISHANVI / Our Story Philosophy */}
+            {/* Welcome to ISHANVI Philosophy (Matching Screenshot 074022) */}
             <AboutSection onLearnMore={() => handlePageChange('about')} />
 
-            {/* River Smile Inspired Cinematic Editorial Interlude */}
+            {/* Editorial Interlude */}
             <EditorialInterlude />
 
-            {/* 3. The ISHANVI Experience (4 Distinctive Pillars) */}
+            {/* Distinctive Pillars of Experience */}
             <ExperiencePillarsSection />
 
-            {/* 4. Discover Your Space (Rooms Designed For Your Comfort - 3 Cards) */}
+            {/* Rooms Designed For Your Comfort (Matching Screenshot 074113 Top) */}
             <RoomsSection
               onOpenEnquiry={handleOpenEnquiry}
               onViewAllRooms={() => handlePageChange('rooms')}
               isStandalonePage={false}
             />
 
-            {/* 5. A Closer Look at Your Stay (Room Specs Matrix & Furnishings) */}
+            {/* Room Comparison Matrix */}
             <RoomComparisonSection onOpenEnquiry={handleOpenEnquiry} />
 
-            <div className="gold-divider" />
-
-            {/* 6. Comfort in Every Detail (8 Gold Outline Amenities Cards) */}
+            {/* Amenities Everything You Need (Matching Screenshot 074113 Bottom) */}
             <AmenitiesSection isStandalonePage={false} />
 
-            {/* 7. Everyday Living at ISHANVI (Daily Rhythm Interactive Timeline) */}
+            {/* Everyday Living Daily Rhythm Timeline */}
             <LifestyleStorySection />
 
-            {/* 8. Why Choose ISHANVI (Meaningful Student & Parent Advantages) */}
+            {/* Why Choose ISHANVI */}
             <WhyChooseSection onOpenEnquiry={() => handleOpenEnquiry('Campus Visit')} />
 
-            {/* 9. Image-Rich Immersive Gallery (Dark Green Banner + Lightbox) */}
+            {/* Immersive Gallery (Matching Screenshot 074059 Top) */}
             <GallerySection
               onViewAllGallery={() => handlePageChange('gallery')}
               isStandalonePage={false}
             />
 
-            {/* 10. What Our Residents Say (Testimonials with < > Controls) */}
+            {/* Testimonials (Matching Screenshot 074059 Middle) */}
             <TestimonialsSection />
 
-            <div className="gold-divider" />
-
-            {/* 11. Explore Surroundings & Location (Ambegaon Bk, Pune Proximity) */}
+            {/* Location & Connectivity near ISMS Sankalp */}
             <LocationSection />
 
-            {/* 12. Frequently Asked Questions (Transparent Answers) */}
-            <FaqSection onOpenEnquiry={handleOpenEnquiry} />
-
-            {/* 13. Bottom CTA Banner ("Start Your Better Tomorrow With Ishanvi") */}
+            {/* Bottom CTA Banner (Matching Screenshot 074059 Bottom) */}
             <BottomCtaSection onOpenEnquiry={handleOpenEnquiry} />
 
-            {/* 14. Lead Capture Form */}
+            {/* Lead Capture Admissions Desk */}
             <ContactSection initialRoom={selectedRoomForEnquiry} />
           </>
         )}
 
-        {/* DEDICATED ROOMS PAGE (Matching Reference Screenshots 2 & 3) */}
+        {/* DEDICATED ROOMS PAGE WITH EXPANDED INFORMATION */}
         {activePage === 'rooms' && (
-          <div className="space-y-12">
+          <div className="space-y-6 sm:space-y-8">
             <RoomsSection
               onOpenEnquiry={handleOpenEnquiry}
               isStandalonePage={true}

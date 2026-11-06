@@ -11,42 +11,62 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
   onViewAllGallery,
   isStandalonePage = false,
 }) => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const categories = [
+    { id: 'all', label: 'All Spaces' },
+    { id: 'rooms', label: 'Authentic Rooms' },
+    { id: 'study', label: 'Study & Library' },
+    { id: 'amenities', label: 'Amenities & Dining' },
+    { id: 'campus', label: 'Campus & Reception' },
+  ];
+
+  const displayPhotos = isStandalonePage
+    ? selectedCategory === 'all'
+      ? GALLERY_PHOTOS
+      : GALLERY_PHOTOS.filter((p) => p.category === selectedCategory)
+    : GALLERY_PHOTOS.slice(0, 5);
 
   const openLightbox = (idx: number) => setLightboxIndex(idx);
   const closeLightbox = () => setLightboxIndex(null);
 
   const nextPhoto = () => {
     if (lightboxIndex !== null) {
-      setLightboxIndex((lightboxIndex + 1) % GALLERY_PHOTOS.length);
+      setLightboxIndex((lightboxIndex + 1) % displayPhotos.length);
     }
   };
 
   const prevPhoto = () => {
     if (lightboxIndex !== null) {
-      setLightboxIndex((lightboxIndex - 1 + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length);
+      setLightboxIndex((lightboxIndex - 1 + displayPhotos.length) % displayPhotos.length);
     }
   };
 
   return (
-    <section id="gallery" className="section-space bg-[#102A1C] text-white overflow-hidden">
+    <section id="gallery" className={`section-space ${isStandalonePage ? 'bg-[#FDFBF7] text-[#102A1C]' : 'bg-[#102A1C] text-white'} overflow-hidden`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
-            <div className="kicker-label text-[#DFB76C] mb-2">
-              <span className="w-5 h-[1.5px] bg-[#DFB76C]" />
+            <div className={`kicker-label ${isStandalonePage ? 'text-[#C5A059]' : 'text-[#DFB76C]'} mb-2`}>
+              <span className={`w-5 h-[1.5px] ${isStandalonePage ? 'bg-[#C5A059]' : 'bg-[#DFB76C]'}`} />
               <span>GALLERY</span>
             </div>
-            <h2 className="heading-section text-white">
+            <h2 className={`heading-section ${isStandalonePage ? 'text-[#102A1C]' : 'text-white'}`}>
               A Glimpse Of Our Spaces
             </h2>
+            {isStandalonePage && (
+              <p className="text-lead mt-2 max-w-xl">
+                Explore real, verified photographs of ISHANVI property, sanitized rooms, quiet study library, and hygienic dining amenities in Ambegaon Bk, Pune.
+              </p>
+            )}
           </div>
 
           {onViewAllGallery && (
             <button
               onClick={onViewAllGallery}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#DFB76C] hover:text-white transition-colors cursor-pointer group self-start sm:self-auto"
+              className={`inline-flex items-center gap-1.5 text-xs font-semibold ${isStandalonePage ? 'text-[#102A1C] hover:text-[#C5A059]' : 'text-[#DFB76C] hover:text-white'} transition-colors cursor-pointer group self-start sm:self-auto`}
             >
               <span>View Gallery</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -54,25 +74,45 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
           )}
         </div>
 
-        {/* 5-Card Row matching reference */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {GALLERY_PHOTOS.map((photo, index) => (
+        {/* Category Filters for Standalone Page */}
+        {isStandalonePage && (
+          <div className="flex flex-wrap items-center gap-2 mb-8 pb-2 border-b border-[#EFEAE1]">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                  selectedCategory === cat.id
+                    ? 'bg-[#102A1C] text-white shadow-sm'
+                    : 'bg-white text-[#4A5568] hover:text-[#102A1C] border border-[#EFEAE1]'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Photos Grid: 5 columns on homepage to match Screenshot 074059, responsive 3 cols on standalone */}
+        <div className={`grid ${isStandalonePage ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4'}`}>
+          {displayPhotos.map((photo, index) => (
             <div
               key={photo.id}
               onClick={() => openLightbox(index)}
-              className="group relative rounded-xl overflow-hidden aspect-[4/3] bg-black/40 border border-white/10 shadow-md cursor-pointer hover:border-[#DFB76C] transition-all"
+              className={`group relative rounded-2xl overflow-hidden aspect-[4/3] ${
+                isStandalonePage
+                  ? 'bg-white shadow-md border border-[#EFEAE1]'
+                  : 'bg-black/20 border border-white/10 shadow-lg'
+              } cursor-pointer hover:border-[#DFB76C] transition-all`}
             >
               <img
                 src={photo.image}
                 alt={photo.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-106"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-75 group-hover:opacity-90 transition-opacity" />
-
-              <div className="absolute bottom-3 left-3 right-3 text-white">
-                <p className="text-xs font-bold leading-tight line-clamp-1">{photo.title}</p>
-                <p className="text-[10px] text-white/70 line-clamp-1 mt-0.5">{photo.caption}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                <p className="text-xs font-semibold text-white line-clamp-1">{photo.title}</p>
               </div>
 
               <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity">

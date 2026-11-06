@@ -43,7 +43,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage, onOpe
           </button>
 
           {/* Center Navigation Links matching reference */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#2C3530]">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-medium text-[#2C3530]">
             {navLinks.map((link) => {
               const isActive = activePage === link.id;
               return (
@@ -63,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage, onOpe
           </nav>
 
           {/* Right Action: Forest Green Pill Enquire Now Button */}
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4">
             <a
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
               className="flex items-center gap-1.5 text-xs font-semibold text-[#102A1C] hover:text-[#C5A059] transition-colors"
