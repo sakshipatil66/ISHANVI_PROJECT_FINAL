@@ -68,7 +68,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
           )}
         </motion.div>
 
-        {/* 8 Amenities in an elegant row matching Screenshot 074113 */}
+        {/* 8 Amenities in an elegant row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 sm:gap-6">
           {AMENITIES_LIST.map((item, idx) => (
             <motion.div
@@ -80,7 +80,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
               whileHover={{ y: -4 }}
               className="flex flex-col items-center text-center justify-center space-y-3 group cursor-default p-2"
             >
-              <div className="w-14 h-14 rounded-full bg-white border border-[#EFEAE1] shadow-2xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#102A1C] group-hover:border-[#102A1C] transition-all">
+              <div className="w-14 h-14 rounded-full bg-white border border-[#EFEAE1] shadow-2xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#102A1C] group-hover:border-[#102A1C] group-hover:text-[#DFB76C] transition-all">
                 {getAmenityIcon(item.iconName)}
               </div>
               <h3 className="font-serif text-xs sm:text-sm font-bold text-[#102A1C] leading-snug">
@@ -90,28 +90,131 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
           ))}
         </div>
 
-        {/* Extended Bento Showcase for Detailed View */}
-        {isStandalonePage && (
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {AMENITIES_LIST.map((item) => (
-              <div
-                key={item.id}
-                className="p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-sm flex items-start gap-4 hover:border-[#102A1C] transition-colors"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] flex items-center justify-center shrink-0">
-                  {getAmenityIcon(item.iconName)}
-                </div>
-                <div className="space-y-1">
-                  <h4 className="font-serif text-lg font-bold text-[#102A1C]">{item.title}</h4>
-                  <p className="text-xs sm:text-sm text-[#5A655F] leading-relaxed">
-                    {item.description}
-                  </p>
+        {/* Visual Storytelling Showcase of Key Facilities */}
+        <div className="mt-14 pt-12 border-t border-[#EFEAE1]/80">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8"
+          >
+            <span className="text-xs font-bold text-[#A88238] uppercase tracking-[0.16em]">
+              AUTHENTIC RESIDENCE FACILITIES
+            </span>
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#102A1C] mt-1">
+              Curated Spaces for Focus, Fitness & Feasting
+            </h3>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ y: -5 }}
+              className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl transition-all"
+            >
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <img
+                  src="/assets/images/amenity_dining_hall_1793879543322.jpg"
+                  alt="Hygienic Dining Hall"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#DFB76C] text-[11px] font-bold">
+                  Hygienic Dining
                 </div>
               </div>
-            ))}
+              <div className="p-4 space-y-1">
+                <h4 className="font-serif text-base font-bold text-[#102A1C]">Fresh Homestyle Meals</h4>
+                <p className="text-xs text-[#5A655F] leading-relaxed">
+                  Nutritious breakfast, lunch & dinner prepared in sanitized kitchens with seasonal menus.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              whileHover={{ y: -5 }}
+              className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl transition-all"
+            >
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <img
+                  src="/assets/images/amenity_study_lounge_1793879542441.jpg"
+                  alt="Silent Study Lounge"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#DFB76C] text-[11px] font-bold">
+                  Study & Focus
+                </div>
+              </div>
+              <div className="p-4 space-y-1">
+                <h4 className="font-serif text-base font-bold text-[#102A1C]">Silent Study Lounge</h4>
+                <p className="text-xs text-[#5A655F] leading-relaxed">
+                  Noise-damped zones with ergonomic seating, individual power sockets and high-speed Wi-Fi.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              whileHover={{ y: -5 }}
+              className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl transition-all"
+            >
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <img
+                  src="/assets/images/amenity_security_lobby_1793879543609.jpg"
+                  alt="24x7 Security Lobby"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#DFB76C] text-[11px] font-bold">
+                  24×7 Safety
+                </div>
+              </div>
+              <div className="p-4 space-y-1">
+                <h4 className="font-serif text-base font-bold text-[#102A1C]">Secure Reception Desk</h4>
+                <p className="text-xs text-[#5A655F] leading-relaxed">
+                  Biometric gated entry, 24/7 CCTV surveillance, and resident warden attendance registers.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ y: -5 }}
+              className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl transition-all"
+            >
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <img
+                  src="/assets/images/amenity_fitness_hd_1793946898388.jpg"
+                  alt="Resident Fitness Hub"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#DFB76C] text-[11px] font-bold">
+                  Wellness Hub
+                </div>
+              </div>
+              <div className="p-4 space-y-1">
+                <h4 className="font-serif text-base font-bold text-[#102A1C]">Fitness & Recreation</h4>
+                <p className="text-xs text-[#5A655F] leading-relaxed">
+                  Cardio and strength stations alongside indoor recreation games to recharge between study hours.
+                </p>
+              </div>
+            </motion.div>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
 };
+

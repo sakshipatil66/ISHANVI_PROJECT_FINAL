@@ -31,72 +31,74 @@
 
 /* ========================================================
    UNIFIED ISHANVI TYPOGRAPHY DESIGN SYSTEM (PREMIUM & BALANCED)
+   Harmonized across ALL sections of the website.
    ======================================================== */
 
 /* H1: Main Page & Hero Display Title (Unified Across Site) */
 .title-page {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(2rem, 3.4vw, 2.85rem);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
   font-weight: 700;
   line-height: 1.18;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
-/* H2: Section Headings (Uniform across every section) */
+/* H2: Section Headings (Uniform across every single section) */
 .heading-section {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(1.5rem, 2.4vw, 2.15rem);
+  font-size: clamp(1.65rem, 2.5vw, 2.25rem);
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.22;
   letter-spacing: -0.015em;
   text-wrap: balance;
 }
 
-/* Overline / Kicker with Gold Accent */
+/* Overline / Kicker with Gold Accent (Uniform across all sections) */
 .kicker-label {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.6875rem; /* 11px */
+  font-size: 0.75rem; /* 12px */
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #C5A059;
 }
 
-/* Section Subtitle / Lead Paragraph */
+/* Section Subtitle / Lead Paragraph (Uniform across all sections) */
 .text-lead {
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.6;
-  color: #5A655F;
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1.65;
+  color: #2D3748;
 }
 
 /* H3: Card & Subsection Headings (Uniform across all cards) */
 .heading-card {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.0625rem; /* 17px */
+  font-size: 1.1875rem; /* 19px */
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: -0.01em;
+  color: #102A1C;
 }
 
 /* Standard Body Paragraph */
 .text-body {
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.8125rem; /* 13px */
-  line-height: 1.55;
-  color: #5A655F;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.6;
+  color: #374151;
 }
 
 /* Compact Body Text */
 .text-body-sm {
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.75rem; /* 12px */
-  line-height: 1.5;
-  color: #5A655F;
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.55;
+  color: #4B5563;
 }
 
 /* Micro Caption / Label / Status */
@@ -104,7 +106,8 @@
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   font-size: 0.6875rem; /* 11px */
   line-height: 1.45;
-  color: #718096;
+  color: #64748B;
+  font-weight: 500;
 }
 
 /* Unified Buttons */
@@ -113,22 +116,23 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.375rem;
+  padding: 0.6875rem 1.5rem;
   border-radius: 9999px;
   background-color: #102A1C;
   color: #FFFFFF;
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   white-space: nowrap;
-  box-shadow: 0 2px 10px rgba(16, 42, 28, 0.16);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 3px 12px rgba(16, 42, 28, 0.18);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 .btn-primary:hover {
   background-color: #1B3B2B;
-  box-shadow: 0 4px 14px rgba(16, 42, 28, 0.22);
+  box-shadow: 0 6px 18px rgba(16, 42, 28, 0.24);
+  transform: translateY(-1px);
 }
 .btn-primary:active {
   transform: scale(0.97);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   MessageSquare,
@@ -6,15 +6,9 @@ import {
   ShieldCheck,
   Heart,
   MapPin,
-  Bed,
-  Wifi,
-  Utensils,
-  Users,
   ChevronLeft,
   ChevronRight,
   Phone,
-  Maximize2,
-  ExternalLink,
 } from 'lucide-react';
 import { HOSTEL_INFO, FLOATING_FEATURES } from '../data/hostelData';
 
@@ -23,355 +17,350 @@ interface HeroSectionProps {
   onExploreRooms?: () => void;
 }
 
+interface SlideItem {
+  id: number;
+  image: string;
+  alt: string;
+  isFlyerGraphic: boolean;
+  kicker?: string;
+  title?: string;
+  titleHighlight?: string;
+  subtitle?: string;
+}
+
+const SLIDES: SlideItem[] = [
+  {
+    id: 0,
+    // SLIDE 1: Official ISHANVI flyer image expanded full width
+    image: '/assets/images/hero_slide_flyer.jpg',
+    alt: 'ISHANVI Hostel & Accommodation Official Facilities, Spacious Rooms and Helpline',
+    isFlyerGraphic: true,
+  },
+  {
+    id: 1,
+    // SLIDE 2: Authentic student resident in reception lobby with 3D gold logo
+    image: '/assets/images/hero_slide_resident_hd.jpg',
+    alt: 'Student resident holding books in ISHANVI Hostel luxury reception lobby',
+    isFlyerGraphic: false,
+    kicker: 'A SAFE PLACE FOR A BRIGHTER TOMORROW',
+    title: 'Safe Stay. Better Living.',
+    titleHighlight: 'Brighter Tomorrow.',
+    subtitle:
+      'Safe, secure and well-managed student & working professional accommodation directly near ISMS Sankalp Business School, Ambegaon Bk, Pune.',
+  },
+];
+
+const AUTOPLAY_DURATION = 5000; // 5 seconds per slide continuous
+
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExploreRooms }) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
-  const totalSlides = 2;
-  const slideTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [progress, setProgress] = useState<number>(0);
+
+  const totalSlides = SLIDES.length;
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    setProgress(0);
   }, [totalSlides]);
 
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+    setProgress(0);
   }, [totalSlides]);
 
-  // Autoplay every 6 seconds, pause on hover
-  useEffect(() => {
-    if (!isPaused) {
-      slideTimerRef.current = setInterval(() => {
-        nextSlide();
-      }, 6000);
-    }
-    return () => {
-      if (slideTimerRef.current) clearInterval(slideTimerRef.current);
-    };
-  }, [isPaused, nextSlide]);
-
-  const getFloatingIcon = (name: string) => {
-    switch (name) {
-      case 'Bed':
-        return <Bed className="w-5 h-5 text-[#C5A059]" />;
-      case 'Wifi':
-        return <Wifi className="w-5 h-5 text-[#C5A059]" />;
-      case 'Utensils':
-        return <Utensils className="w-5 h-5 text-[#C5A059]" />;
-      case 'Shield':
-        return <ShieldCheck className="w-5 h-5 text-[#C5A059]" />;
-      case 'Users':
-        return <Users className="w-5 h-5 text-[#C5A059]" />;
-      case 'MapPin':
-        return <MapPin className="w-5 h-5 text-[#C5A059]" />;
-      default:
-        return <ShieldCheck className="w-5 h-5 text-[#C5A059]" />;
-    }
+  const goToSlide = (idx: number) => {
+    setCurrentSlide(idx);
+    setProgress(0);
   };
 
-  return (
-    <section
-      className="relative pt-3 pb-8 sm:pt-5 sm:pb-10 bg-[#FDFBF7] overflow-hidden select-none"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {/* Background Soft Glow */}
-      <div className="absolute top-4 right-1/4 w-80 h-80 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute bottom-4 left-10 w-80 h-80 bg-[#102A1C]/5 rounded-full blur-3xl pointer-events-none -z-10" />
+  // Continuous auto-sliding ticker (slides continuously every 5 seconds)
+  useEffect(() => {
+    const intervalStep = 50;
+    const stepIncrement = (intervalStep / AUTOPLAY_DURATION) * 100;
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        {/* Main Sliding Carousel Frame */}
-        <div className="relative min-h-[460px] sm:min-h-[480px] lg:min-h-[500px] flex items-center">
-          {/* Subtle Navigation Arrows */}
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          nextSlide();
+          return 0;
+        }
+        return prev + stepIncrement;
+      });
+    }, intervalStep);
+
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [nextSlide, prevSlide]);
+
+  const activeSlide = SLIDES[currentSlide];
+
+  return (
+    <div className="w-full">
+      {/* 
+        ========================================================================
+        PREMIUM FULL-WIDTH HERO SLIDER — PERFECT UNBLOCKED PROPORTIONS
+        - Height calibrated to prevent vertical clipping on laptop and desktop screens
+        - Full ambient spread across 100% width (no blank side boxes)
+        - Flyer 100% visible: top sun logo and bottom phone bar are completely clear
+        - The 6 amenity buttons are docked neatly inside the hero
+        - Continuous 5-second automatic sliding
+        ========================================================================
+      */}
+      <section
+        className="relative w-full overflow-hidden select-none h-[480px] sm:h-[510px] md:h-[530px] lg:h-[550px] max-h-[560px] flex flex-col justify-between bg-[#08170E]"
+        aria-label="Full-Width Hero Slider"
+      >
+        {/* SLIDE VISUAL CANVAS */}
+        <div className="relative w-full flex-1 overflow-hidden flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSlide.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.65, ease: 'easeInOut' }}
+              className="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden"
+            >
+              {/* 
+                SLIDE 1: Official ISHANVI Flyer in Full Uncropped Clarity
+                - Ambient spread extends 100% edge-to-edge with matching cream (left) and green (right)
+                - Foreground flyer is 100% visible with zero cropping
+              */}
+              {activeSlide.isFlyerGraphic ? (
+                <div
+                  onClick={() => onOpenEnquiry('Official Facilities & Rooms')}
+                  className="relative z-10 w-full h-full flex items-center justify-center cursor-pointer overflow-hidden group"
+                  title="Click to Enquire for ISHANVI Hostel Accommodation"
+                  style={{
+                    background:
+                      'linear-gradient(90deg, #FAF7F2 0%, #FAF7F2 42%, #0E291B 65%, #08180E 100%)',
+                  }}
+                >
+                  {/* Full-Bleed Ambient Spread Layer across 100% width */}
+                  <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
+                    <img
+                      src={activeSlide.image}
+                      alt=""
+                      aria-hidden="true"
+                      className="w-full h-full object-cover object-center filter blur-2xl scale-110 opacity-60"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2]/80 via-[#FAF7F2]/25 via-42% to-[#08180E]/80 pointer-events-none" />
+                  </div>
+
+                  {/* Crisp Sharp 100% Uncropped Foreground Flyer with breathing room */}
+                  <div className="relative z-10 w-full h-full flex items-center justify-center p-1 sm:p-2">
+                    <img
+                      src={activeSlide.image}
+                      alt={activeSlide.alt}
+                      className="max-h-full max-w-full w-auto h-auto object-contain object-center drop-shadow-2xl select-none transition-transform duration-700 group-hover:scale-[1.006]"
+                      referrerPolicy="no-referrer"
+                      loading="eager"
+                    />
+                  </div>
+                </div>
+              ) : (
+                /* SLIDE 2: Full-Bleed Photograph of Resident in Luxury Lobby */
+                <div className="relative z-10 w-full h-full">
+                  <img
+                    src={activeSlide.image}
+                    alt={activeSlide.alt}
+                    className="w-full h-full object-cover object-center lg:object-right select-none"
+                    referrerPolicy="no-referrer"
+                    loading="eager"
+                  />
+                  {/* Directional Dark Gradient for High-Contrast Typography */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07170E] via-[#07170E]/80 to-[#07170E]/30 sm:bg-gradient-to-r sm:from-[#07170E]/95 sm:via-[#07170E]/75 sm:to-transparent pointer-events-none" />
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* SUBTLE PREVIOUS & NEXT ARROWS AT SCREEN MARGINS */}
           <button
             onClick={prevSlide}
-            aria-label="Previous Hero Slide"
-            className="absolute -left-2 sm:left-1 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/90 backdrop-blur-md border border-[#EFEAE1] text-[#102A1C] hover:bg-[#102A1C] hover:text-[#DFB76C] hover:border-[#102A1C] flex items-center justify-center shadow-lg transition-all cursor-pointer active:scale-95"
+            aria-label="Previous Slide"
+            className="absolute left-2 sm:left-4 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/45 hover:bg-[#DFB76C] text-white hover:text-[#07170E] border border-white/20 backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-xl active:scale-95"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <button
             onClick={nextSlide}
-            aria-label="Next Hero Slide"
-            className="absolute -right-2 sm:right-1 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/90 backdrop-blur-md border border-[#EFEAE1] text-[#102A1C] hover:bg-[#102A1C] hover:text-[#DFB76C] hover:border-[#102A1C] flex items-center justify-center shadow-lg transition-all cursor-pointer active:scale-95"
+            aria-label="Next Slide"
+            className="absolute right-2 sm:right-4 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/45 hover:bg-[#DFB76C] text-white hover:text-[#07170E] border border-white/20 backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-xl active:scale-95"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
-          {/* Slides Container */}
-          <div className="w-full relative overflow-hidden">
-            <AnimatePresence mode="wait">
-              {/* SLIDE 1: Interactive Website Hero (Screenshot 2026-11-06 074003.png) */}
-              {currentSlide === 0 && (
-                <motion.div
-                  key="slide-0"
-                  initial={{ opacity: 0, x: 25 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -25 }}
-                  transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-full"
-                >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-                    {/* Left Column Text & Actions */}
-                    <div className="lg:col-span-6 space-y-4">
-                      {/* Kicker */}
-                      <div className="kicker-label">
-                        <span className="w-6 h-[1.5px] bg-[#C5A059]" />
-                        <span>{HOSTEL_INFO.heroKicker}</span>
-                      </div>
-
-                      {/* Display Heading */}
-                      <h1 className="title-page text-[#102A1C]">
-                        Premium Hostel & <br className="hidden sm:block" />
-                        Accommodation
-                      </h1>
-
-                      {/* Subtitle */}
-                      <p className="text-lead max-w-lg text-[#4A5568]">
-                        {HOSTEL_INFO.heroSubtitle}
-                      </p>
-
-                      {/* Action Button */}
-                      <div className="pt-1 flex flex-wrap items-center gap-3">
-                        <button
-                          onClick={() => onOpenEnquiry()}
-                          className="btn-primary group !py-2.5 !px-6 text-xs font-semibold shadow-md"
-                        >
-                          <MessageSquare className="w-3.5 h-3.5 text-[#DFB76C]" />
-                          <span>Enquire Now</span>
-                          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                        </button>
-
-                        <button
-                          onClick={nextSlide}
-                          className="btn-secondary text-xs"
-                        >
-                          <span>View Official Brochure Flyer →</span>
-                        </button>
-                      </div>
-
-                      {/* 3 Trust Badges exactly matching Screenshot 074003 */}
-                      <div className="pt-3 grid grid-cols-3 gap-3 max-w-lg">
-                        <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-1">
-                          <div className="w-9 h-9 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center text-[#102A1C] shadow-2xs">
-                            <ShieldCheck className="w-4 h-4 text-[#C5A059]" />
-                          </div>
-                          <h4 className="font-serif text-xs font-bold text-[#102A1C] leading-tight">
-                            Safe & Secure <br /> Environment
-                          </h4>
-                        </div>
-
-                        <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-1">
-                          <div className="w-9 h-9 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center text-[#102A1C] shadow-2xs">
-                            <Heart className="w-4 h-4 text-[#C5A059]" />
-                          </div>
-                          <h4 className="font-serif text-xs font-bold text-[#102A1C] leading-tight">
-                            Homely & Friendly <br /> Community
-                          </h4>
-                        </div>
-
-                        <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-1">
-                          <div className="w-9 h-9 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center text-[#102A1C] shadow-2xs">
-                            <MapPin className="w-4 h-4 text-[#C5A059]" />
-                          </div>
-                          <h4 className="font-serif text-xs font-bold text-[#102A1C] leading-tight">
-                            Prime Location <br /> & Easy Access
-                          </h4>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right Column: Student Resident Photo in front of ISHANVI 3D reception emblem */}
-                    <div className="lg:col-span-6 relative">
-                      <div
-                        onClick={() => setIsLightboxOpen(true)}
-                        className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-[#FAF8F5] to-[#EAE3D2] border-2 border-white aspect-[4/3] sm:aspect-[14/11] group cursor-pointer"
-                      >
-                        <img
-                          src="/assets/ref/hero_student.jpg"
-                          alt="Student resident at ISHANVI Hostel"
-                          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-102"
-                          referrerPolicy="no-referrer"
-                        />
-                        {/* Soft left gradient blend matching Screenshot 074003 */}
-                        <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#FDFBF7]/80 via-[#FDFBF7]/25 to-transparent pointer-events-none hidden sm:block" />
-
-                        <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl text-white text-[11px] flex items-center gap-2">
-                          <span className="font-semibold">Slide 1 of 2: Resident Life & Reception</span>
-                          <span className="text-[#DFB76C] text-[10px]">Click to Zoom</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-
-              {/* SLIDE 2: Official Property Showcase Banner (WhatsApp Image 2026-11-05 at 11.09.47 AM.jpeg) */}
-              {currentSlide === 1 && (
-                <motion.div
-                  key="slide-1"
-                  initial={{ opacity: 0, x: 25 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -25 }}
-                  transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-full"
-                >
-                  <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#DFB76C]/60 shadow-2xl bg-[#0D2619] group">
-                    {/* The Original Uploaded Official Flyer Image */}
-                    <img
-                      src="/assets/aistudio/WhatsApp_Image_2026-11-05_at_11.09.47_AM_48669e14.jpeg"
-                      alt="ISHANVI Hostel & Accommodation Official Brochure & Rooms Showcase"
-                      className="w-full h-auto max-h-[520px] object-contain sm:object-cover bg-[#FFFDF9] mx-auto block cursor-pointer transition-transform duration-700 group-hover:scale-[1.01]"
-                      onClick={() => setIsLightboxOpen(true)}
-                      referrerPolicy="no-referrer"
-                    />
-
-                    {/* Interactive Floating Quick Actions on the Flyer */}
-                    <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-6 sm:right-6 flex flex-wrap items-center justify-between gap-2 pointer-events-auto">
-                      <div className="flex items-center gap-2">
-                        <a
-                          href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-                          className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#102A1C]/90 text-white text-xs font-semibold border border-[#DFB76C] shadow-md hover:bg-[#1B3B2B] transition-colors"
-                        >
-                          <Phone className="w-3.5 h-3.5 text-[#DFB76C]" />
-                          <span>Call: {HOSTEL_INFO.phonePrimary}</span>
-                        </a>
-
-                        <button
-                          onClick={() => onOpenEnquiry('Official Flyer')}
-                          className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#DFB76C] text-[#102A1C] text-xs font-bold shadow-md hover:bg-[#EAC885] transition-colors cursor-pointer"
-                        >
-                          <MessageSquare className="w-3.5 h-3.5" />
-                          <span>Enquire for Room</span>
-                        </button>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => setIsLightboxOpen(true)}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-md text-white text-xs hover:bg-black/90 transition-colors"
-                        >
-                          <Maximize2 className="w-3.5 h-3.5 text-[#DFB76C]" />
-                          <span className="hidden sm:inline">Inspect High-Res</span>
-                        </button>
-
-                        <button
-                          onClick={prevSlide}
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/90 text-[#102A1C] text-xs font-semibold hover:bg-white transition-colors"
-                        >
-                          <span>← Back to Slide 1</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Carousel Indicators (Dots & Labels) */}
-        <div className="flex items-center justify-center gap-2.5 mt-5">
-          <button
-            onClick={() => setCurrentSlide(0)}
-            className={`transition-all duration-300 rounded-full cursor-pointer flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold ${
-              currentSlide === 0
-                ? 'bg-[#102A1C] text-white shadow-sm'
-                : 'bg-[#FAF8F5] text-[#718096] hover:text-[#102A1C] border border-[#EFEAE1]'
-            }`}
-          >
-            <span className={`w-2 h-2 rounded-full ${currentSlide === 0 ? 'bg-[#DFB76C]' : 'bg-[#CBD5E0]'}`} />
-            <span>01 · Resident Life (Screenshot 074003)</span>
-          </button>
-
-          <button
-            onClick={() => setCurrentSlide(1)}
-            className={`transition-all duration-300 rounded-full cursor-pointer flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold ${
-              currentSlide === 1
-                ? 'bg-[#102A1C] text-white shadow-sm'
-                : 'bg-[#FAF8F5] text-[#718096] hover:text-[#102A1C] border border-[#EFEAE1]'
-            }`}
-          >
-            <span className={`w-2 h-2 rounded-full ${currentSlide === 1 ? 'bg-[#DFB76C]' : 'bg-[#CBD5E0]'}`} />
-            <span>02 · Official Property Flyer (WhatsApp Image)</span>
-          </button>
-        </div>
-
-        {/* Floating Feature Strip matching reference */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="mt-6 bg-white rounded-2xl p-3 sm:p-4 shadow-lg border border-[#EFEAE1]"
-        >
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#EFEAE1]/60">
-            {FLOATING_FEATURES.map((item, idx) => (
-              <div
-                key={idx}
-                className={`flex flex-col items-center text-center justify-center p-1.5 cursor-default ${
-                  idx > 0 ? 'sm:pl-3' : ''
-                }`}
-              >
-                <div className="w-9 h-9 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center mb-1.5 shadow-2xs">
-                  {getFloatingIcon(item.icon)}
+          {/* 
+            SLIDE 2 EDITORIAL CONTENT OVERLAY:
+            Only rendered on Slide 2. Positioned on the left.
+          */}
+          {currentSlide === 1 && (
+            <div className="absolute inset-0 z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7 flex flex-col justify-center pointer-events-none">
+              <div className="max-w-xl lg:max-w-2xl space-y-3 pointer-events-auto">
+                {/* Kicker */}
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-[2px] bg-[#DFB76C]" />
+                  <span className="text-[#DFB76C] text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase font-sans">
+                    {activeSlide.kicker}
+                  </span>
                 </div>
-                <span className="text-[11px] font-semibold text-[#102A1C] leading-snug">
-                  {item.title}
-                </span>
+
+                {/* Heading */}
+                <h1 className="font-serif text-2xl sm:text-3xl lg:text-[38px] font-bold text-white leading-[1.16] tracking-tight">
+                  {activeSlide.title} <br className="hidden sm:inline" />
+                  <span className="text-[#DFB76C] italic font-normal">
+                    {activeSlide.titleHighlight}
+                  </span>
+                </h1>
+
+                {/* Subhead */}
+                <p className="text-white/85 text-xs sm:text-sm leading-relaxed max-w-lg font-sans">
+                  {activeSlide.subtitle}
+                </p>
+
+                {/* CTAs */}
+                <div className="pt-1 flex flex-wrap items-center gap-3">
+                  <button
+                    onClick={() => onOpenEnquiry('Resident Life')}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#DFB76C] text-[#07170E] text-xs sm:text-sm font-bold shadow-lg hover:bg-[#EAC885] active:scale-98 transition-all cursor-pointer"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5 text-[#07170E]" />
+                    <span>Enquire for Room</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+
+                  <a
+                    href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold border border-white/25 backdrop-blur-md shadow-md transition-all active:scale-98"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-[#DFB76C]" />
+                    <span>Call: {HOSTEL_INFO.phonePrimary}</span>
+                  </a>
+                </div>
+
+                {/* Trust Badges */}
+                <div className="pt-2 grid grid-cols-3 gap-2 sm:gap-4 max-w-md border-t border-white/20">
+                  <div className="flex flex-col space-y-0.5">
+                    <div className="flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#DFB76C]" />
+                      <span className="text-white text-xs font-semibold font-serif">Safe & Secure</span>
+                    </div>
+                    <span className="text-white/70 text-[10px] leading-tight">24/7 Guard & CCTV</span>
+                  </div>
+
+                  <div className="flex flex-col space-y-0.5">
+                    <div className="flex items-center gap-1.5">
+                      <Heart className="w-3.5 h-3.5 text-[#DFB76C]" />
+                      <span className="text-white text-xs font-semibold font-serif">Homely</span>
+                    </div>
+                    <span className="text-white/70 text-[10px] leading-tight">Supportive Scholars</span>
+                  </div>
+
+                  <div className="flex flex-col space-y-0.5">
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-[#DFB76C]" />
+                      <span className="text-white text-xs font-semibold font-serif">Prime Location</span>
+                    </div>
+                    <span className="text-white/70 text-[10px] leading-tight">Near ISMS Sankalp</span>
+                  </div>
+                </div>
               </div>
-            ))}
+            </div>
+          )}
+        </div>
+
+        {/* 
+          ========================================================================
+          INTEGRATED BOTTOM DOCK (INSIDE HERO SECTION, BELOW THE VISUAL CANVAS)
+          - Contains the 6 feature buttons in a clean white card.
+          - Never overlaps or covers the flyer's phone number and address bar!
+          - Contains the continuous auto-slide controls and 5s progress line.
+          ========================================================================
+        */}
+        <div className="relative z-30 w-full bg-[#06140B] border-t border-white/10 px-3 sm:px-6 lg:px-8 pt-2.5 pb-2 space-y-2">
+          {/* The 6 Feature Buttons in an Elegant Floating White Card */}
+          <div className="max-w-6xl mx-auto bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl px-3 sm:px-5 py-2 sm:py-2.5 shadow-md border border-white/50">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-200/80">
+              {FLOATING_FEATURES.map((item, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => onOpenEnquiry(item.title)}
+                  className={`flex items-center justify-center text-center p-1 group cursor-pointer hover:text-[#C5A059] transition-all ${
+                    idx > 0 ? 'sm:pl-3' : ''
+                  }`}
+                >
+                  <span className="text-[11px] sm:text-xs font-bold text-[#102A1C] group-hover:text-[#A88238] transition-colors leading-tight">
+                    {item.title}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
-        </motion.div>
-      </div>
 
-      {/* Lightbox Modal for Full Image Inspection */}
-      {isLightboxOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
-          onClick={() => setIsLightboxOpen(false)}
-        >
-          <div
-            className="max-w-5xl max-h-[92vh] flex flex-col items-center justify-center relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={
-                currentSlide === 0
-                  ? '/assets/ref/hero_student.jpg'
-                  : '/assets/aistudio/WhatsApp_Image_2026-11-05_at_11.09.47_AM_48669e14.jpeg'
-              }
-              alt="High resolution preview"
-              className="max-w-full max-h-[78vh] rounded-xl object-contain shadow-2xl border border-white/20"
-              referrerPolicy="no-referrer"
-            />
+          {/* Slider Control Strip */}
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            {/* Slide Pill Selectors */}
+            <div className="flex items-center gap-2">
+              {SLIDES.map((slide, idx) => {
+                const isActive = currentSlide === idx;
+                return (
+                  <button
+                    key={slide.id}
+                    onClick={() => goToSlide(idx)}
+                    className={`relative px-3 py-1 rounded-full text-[11px] font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                      isActive
+                        ? 'bg-[#102A1C] text-[#DFB76C] border border-[#DFB76C]/60 shadow-sm'
+                        : 'bg-white/5 text-white/70 hover:text-white hover:bg-white/10 border border-white/10'
+                    }`}
+                  >
+                    <span
+                      className={`w-1.5 h-1.5 rounded-full ${
+                        isActive ? 'bg-[#DFB76C]' : 'bg-white/40'
+                      }`}
+                    />
+                    <span className="font-sans font-semibold">
+                      0{idx + 1} · {idx === 0 ? 'Official Facilities Showcase' : 'Resident Life & Lobby'}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-            <div className="mt-3 text-center text-white space-y-2">
-              <h3 className="font-serif text-base sm:text-lg font-bold text-[#DFB76C]">
-                {currentSlide === 0
-                  ? 'Slide 1: Student Resident Life & Reception (Screenshot 074003)'
-                  : 'Slide 2: ISHANVI Hostel Official Brochure Banner (WhatsApp Image)'}
-              </h3>
-              <div className="flex items-center justify-center gap-3">
-                <button
-                  onClick={() => setCurrentSlide(currentSlide === 0 ? 1 : 0)}
-                  className="px-4 py-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white text-xs font-semibold"
-                >
-                  Switch to {currentSlide === 0 ? 'Slide 2 (Official Flyer)' : 'Slide 1 (Resident Life)'}
-                </button>
-                <button
-                  onClick={() => setIsLightboxOpen(false)}
-                  className="px-4 py-1.5 rounded-full bg-[#C5A059] text-white text-xs font-semibold cursor-pointer"
-                >
-                  Close Lightbox
-                </button>
+            {/* Continuous Auto-Slide Active Beacon & Step Counter */}
+            <div className="flex items-center gap-3">
+              <span className="text-white/75 text-[11px] font-mono hidden sm:inline">
+                Slide <strong className="text-[#DFB76C]">0{currentSlide + 1}</strong> of 0{totalSlides}
+              </span>
+
+              <div className="text-emerald-300 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[11px] flex items-center gap-1.5 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="font-sans font-medium">Continuous Auto-Slide (5s)</span>
               </div>
             </div>
           </div>
+
+          {/* 5-SECOND PROGRESS LINE AT THE BOTTOM EDGE OF THE HERO */}
+          <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white/10">
+            <motion.div
+              className="h-full bg-gradient-to-r from-[#DFB76C] via-[#EAC885] to-[#DFB76C]"
+              style={{ width: `${progress}%` }}
+              transition={{ ease: 'linear' }}
+            />
+          </div>
         </div>
-      )}
-    </section>
+      </section>
+    </div>
   );
 };

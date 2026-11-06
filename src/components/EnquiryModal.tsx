@@ -158,14 +158,14 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   Full Name *
                 </label>
                 <div className="relative">
-                  <User className="w-4 h-4 text-[#718096] absolute left-3 top-3" />
+                  <User className="w-4 h-4 text-[#4B5563] absolute left-3 top-3" />
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Resident or Parent Name"
-                    className={`w-full pl-9 pr-3 py-2 text-xs rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
-                      errors.name ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
+                    className={`w-full pl-9 pr-3 py-2 text-xs rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-white ${
+                      errors.name ? 'border-red-400 bg-red-50' : 'border-[#CBD5E1]'
                     }`}
                   />
                 </div>
@@ -178,14 +178,14 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     Phone Number *
                   </label>
                   <div className="relative">
-                    <Phone className="w-4 h-4 text-[#718096] absolute left-3 top-3" />
+                    <Phone className="w-4 h-4 text-[#4B5563] absolute left-3 top-3" />
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+91 77670 58988"
-                      className={`w-full pl-9 pr-3 py-2 text-xs rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
-                        errors.phone ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
+                      className={`w-full pl-9 pr-3 py-2 text-xs rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-white ${
+                        errors.phone ? 'border-red-400 bg-red-50' : 'border-[#CBD5E1]'
                       }`}
                     />
                   </div>
@@ -197,7 +197,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     Email *
                   </label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-[#718096] absolute left-3 top-3" />
+                    <Mail className="w-4 h-4 text-[#4B5563] absolute left-3 top-3" />
                     <input
                       type="email"
                       value={formData.email}

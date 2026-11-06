@@ -134,6 +134,12 @@ export default function App() {
         {/* DEDICATED ROOMS PAGE WITH EXPANDED INFORMATION */}
         {activePage === 'rooms' && (
           <div className="space-y-6 sm:space-y-8">
+            <PageHeader
+              kicker="ACCOMMODATION & SPECIFICATIONS"
+              title="Rooms Designed For Your Comfort"
+              subtitle="Inspect verified room photographs, orthopaedic mattresses, ergonomic study desks, wooden wardrobes, and daily homestyle meals in Ambegaon Bk, Pune."
+              onOpenEnquiry={handleOpenEnquiry}
+            />
             <RoomsSection
               onOpenEnquiry={handleOpenEnquiry}
               isStandalonePage={true}
@@ -150,6 +156,7 @@ export default function App() {
               kicker="OUR STORY & VALUES"
               title="About ISHANVI Residence"
               subtitle="Discover our philosophy of providing a peaceful sanctuary for scholars and professionals in Ambegaon Bk, Pune."
+              onOpenEnquiry={handleOpenEnquiry}
             />
             <AboutSection onLearnMore={() => handlePageChange('contact')} />
             <EditorialInterlude />
@@ -164,8 +171,9 @@ export default function App() {
           <div className="space-y-12">
             <PageHeader
               kicker="COMFORT IN EVERY DETAIL"
-              title="Comprehensive Amenities"
-              subtitle="Everything you need for focused learning, hygienic homestyle meals, and round-the-clock safety."
+              title="Comprehensive Living Amenities"
+              subtitle="Everything you need for focused learning, hygienic homestyle meals, power backup, and round-the-clock safety."
+              onOpenEnquiry={handleOpenEnquiry}
             />
             <AmenitiesSection isStandalonePage={true} />
             <LifestyleStorySection />
@@ -179,7 +187,8 @@ export default function App() {
             <PageHeader
               kicker="IMMERSIVE SPACES"
               title="A Glimpse Of Our Spaces"
-              subtitle="Tour our clean bedrooms, silent study library, hygienic dining hall, and guarded campus grounds."
+              subtitle="Tour verified photographs of our clean bedrooms, silent study library, hygienic dining hall, and guarded campus grounds."
+              onOpenEnquiry={handleOpenEnquiry}
             />
             <GallerySection isStandalonePage={true} />
             <BottomCtaSection onOpenEnquiry={handleOpenEnquiry} />
@@ -192,7 +201,8 @@ export default function App() {
             <PageHeader
               kicker="REACH OUT DIRECTLY"
               title="Contact & Admissions Desk"
-              subtitle="We welcome prospective residents and parents for room tours, pricing details, and admissions assistance."
+              subtitle="We welcome prospective residents and parents for room tours, pricing details, and admissions assistance near ISMS Sankalp."
+              onOpenEnquiry={handleOpenEnquiry}
             />
             <ContactSection
               initialRoom={selectedRoomForEnquiry}

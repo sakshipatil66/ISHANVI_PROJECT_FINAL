@@ -37,17 +37,17 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
           </p>
 
           {/* Interactive Room Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-8 p-1.5 bg-[#FAF8F5] rounded-full inline-flex border border-[#EFEAE1] shadow-xs">
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-8 p-1.5 bg-white rounded-full inline-flex border border-[#E2D9C8] shadow-sm">
             {ROOMS_DATA.map((room) => {
               const isSelected = selectedRoomId === room.id;
               return (
                 <button
                   key={room.id}
                   onClick={() => setSelectedRoomId(room.id)}
-                  className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                  className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-[#102A1C] text-white shadow-sm'
-                      : 'text-[#4A5568] hover:text-[#102A1C]'
+                      ? 'bg-[#102A1C] text-[#DFB76C] shadow-md border border-[#DFB76C]/40'
+                      : 'text-[#1F2937] hover:text-[#102A1C] hover:bg-[#FAF8F5]'
                   }`}
                 >
                   {room.name}
@@ -58,7 +58,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
         </motion.div>
 
         {/* Selected Room Interactive Showcase */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#EFEAE1] shadow-xl">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#E2D9C8] shadow-xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedRoom.id}
@@ -70,11 +70,11 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
             >
               {/* Left Column: Room Photo with Badge */}
               <div className="lg:col-span-6 relative">
-                <div className="rounded-2xl overflow-hidden shadow-lg border-4 border-[#FAF8F5] aspect-[16/10] bg-[#FAF8F5] group">
+                <div className="rounded-2xl overflow-hidden shadow-lg border-4 border-[#FAF8F5] aspect-[4/3] max-h-[440px] bg-[#FAF8F5] group">
                   <img
                     src={selectedRoom.image}
                     alt={selectedRoom.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute top-4 left-4 bg-[#102A1C]/90 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-semibold border border-[#DFB76C]/30 flex items-center gap-1.5">
@@ -130,7 +130,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                     {selectedRoom.furnishings.map((f, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs text-[#5A655F]">
+                      <div key={i} className="flex items-center gap-2 text-xs font-medium text-[#2D3748]">
                         <Check className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
                         <span>{f}</span>
                       </div>

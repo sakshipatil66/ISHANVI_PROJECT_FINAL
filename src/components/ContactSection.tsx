@@ -94,32 +94,32 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-xs text-[#718096]">Call Now for Enquiry</p>
+                    <p className="text-xs font-semibold text-[#4B5563]">Call Now for Enquiry</p>
                     <p className="text-sm font-bold text-[#102A1C]">
                       {HOSTEL_INFO.phonePrimary}
                     </p>
                   </div>
                 </a>
 
-                <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1]">
+                <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E2D9C8]">
                   <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-xs text-[#718096]">Hostel Location</p>
-                    <p className="text-xs font-semibold text-[#102A1C] leading-snug">
+                    <p className="text-xs font-semibold text-[#4B5563]">Hostel Location</p>
+                    <p className="text-xs font-bold text-[#102A1C] leading-snug">
                       {HOSTEL_INFO.address}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1]">
+                <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E2D9C8]">
                   <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0">
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-xs text-[#718096]">Visiting Hours</p>
-                    <p className="text-xs font-semibold text-[#102A1C]">
+                    <p className="text-xs font-semibold text-[#4B5563]">Visiting Hours</p>
+                    <p className="text-xs font-bold text-[#102A1C]">
                       {HOSTEL_INFO.visitingHours}
                     </p>
                   </div>

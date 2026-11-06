@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage, onOpe
   return (
     <header className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#EFEAE1] transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-[68px]">
           {/* Exact Brand Logo from Reference */}
           <button
             onClick={() => handleNavClick('home')}
@@ -38,7 +38,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage, onOpe
             <img
               src={HOSTEL_INFO.logoUrl}
               alt="ISHANVI Hostel & Accommodation"
-              className="h-10 sm:h-12 w-auto object-contain max-w-[200px] sm:max-w-[260px]"
+              className="h-9 sm:h-11 w-auto object-contain max-w-[180px] sm:max-w-[240px]"
             />
           </button>
 

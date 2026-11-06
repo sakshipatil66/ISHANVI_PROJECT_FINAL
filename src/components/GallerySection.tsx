@@ -76,15 +76,15 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
 
         {/* Category Filters for Standalone Page */}
         {isStandalonePage && (
-          <div className="flex flex-wrap items-center gap-2 mb-8 pb-2 border-b border-[#EFEAE1]">
+          <div className="flex flex-wrap items-center gap-2 mb-8 pb-3 border-b border-[#E2D9C8]">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                   selectedCategory === cat.id
-                    ? 'bg-[#102A1C] text-white shadow-sm'
-                    : 'bg-white text-[#4A5568] hover:text-[#102A1C] border border-[#EFEAE1]'
+                    ? 'bg-[#102A1C] text-[#DFB76C] shadow-md border border-[#DFB76C]/40'
+                    : 'bg-white text-[#1F2937] hover:text-[#102A1C] hover:bg-[#FAF8F5] border border-[#E2D9C8]'
                 }`}
               >
                 {cat.label}
@@ -101,8 +101,8 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
               onClick={() => openLightbox(index)}
               className={`group relative rounded-2xl overflow-hidden aspect-[4/3] ${
                 isStandalonePage
-                  ? 'bg-white shadow-md border border-[#EFEAE1]'
-                  : 'bg-black/20 border border-white/10 shadow-lg'
+                  ? 'bg-white shadow-md border border-[#E2D9C8]'
+                  : 'bg-black/20 border border-white/15 shadow-lg'
               } cursor-pointer hover:border-[#DFB76C] transition-all`}
             >
               <img
@@ -111,8 +111,8 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-106"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                <p className="text-xs font-semibold text-white line-clamp-1">{photo.title}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3.5">
+                <p className="text-xs font-bold text-white line-clamp-1">{photo.title}</p>
               </div>
 
               <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity">

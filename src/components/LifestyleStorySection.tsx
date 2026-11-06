@@ -65,7 +65,7 @@ export const LifestyleStorySection: React.FC = () => {
                 >
                   <div
                     className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                      isActive ? 'bg-[#102A1C] text-[#DFB76C]' : 'bg-[#F4EFE6] text-[#718096]'
+                      isActive ? 'bg-[#102A1C] text-[#DFB76C]' : 'bg-[#F4EFE6] text-[#4A5568]'
                     }`}
                   >
                     {getStepIcon(idx)}
@@ -73,17 +73,17 @@ export const LifestyleStorySection: React.FC = () => {
 
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#C5A059] uppercase tracking-wider tabular-nums">
+                      <span className="text-xs font-bold text-[#A88238] uppercase tracking-wider tabular-nums">
                         {step.time}
                       </span>
-                      <span className="text-[10px] font-medium text-[#718096] bg-white px-2 py-0.5 rounded-full border border-[#EFEAE1]">
+                      <span className="text-[10px] font-bold text-[#102A1C] bg-[#FAF8F5] px-2.5 py-0.5 rounded-full border border-[#E2D9C8]">
                         {step.tag}
                       </span>
                     </div>
                     <h3 className="heading-card text-[#102A1C] mt-1">
                       {step.title}
                     </h3>
-                    <p className="text-body-sm text-[#718096] mt-0.5 line-clamp-1">{step.subtitle}</p>
+                    <p className="text-body-sm text-[#4B5563] mt-0.5 line-clamp-1">{step.subtitle}</p>
                   </div>
                 </button>
               );
@@ -92,7 +92,7 @@ export const LifestyleStorySection: React.FC = () => {
 
           {/* Right Column: Visual Stage of the Moment */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EFEAE1] shadow-2xl overflow-hidden">
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E2D9C8] shadow-2xl overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentItem.time}
@@ -119,16 +119,16 @@ export const LifestyleStorySection: React.FC = () => {
                     <h3 className="heading-card text-[#102A1C] text-xl sm:text-2xl">
                       {currentItem.title}
                     </h3>
-                    <p className="text-body-sm font-semibold text-[#C5A059]">{currentItem.subtitle}</p>
-                    <p className="text-lead pt-1">
+                    <p className="text-body-sm font-bold text-[#A88238]">{currentItem.subtitle}</p>
+                    <p className="text-lead text-[#2D3748] pt-1 font-normal">
                       {currentItem.description}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#EFEAE1] flex items-center justify-between text-xs text-[#718096]">
+                  <div className="pt-4 border-t border-[#EFEAE1] flex items-center justify-between text-xs text-[#4A5568]">
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#C5A059]" />
-                      <span>Zero mundane distractions—all domestic chores managed</span>
+                      <CheckCircle2 className="w-4 h-4 text-[#A88238]" />
+                      <span className="font-medium text-[#2D3748]">Zero mundane distractions—all domestic chores managed</span>
                     </div>
                     <span className="font-bold text-[#102A1C] tabular-nums">
                       0{activeStep + 1} / 0{DAILY_LIFESTYLE_TIMELINE.length}
